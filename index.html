@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mimosa — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream: #FBF4EA;
+  --cream-alt: #F2E9D8;
+  --navy: #1C2333;
+  --navy-soft: #565E70;
+  --line: #E4D7BE;
+  --radius: 10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--cream);
+  color:var(--navy);
+  font-family:'Work Sans', sans-serif;
+  line-height:1.6;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+h1,h2{font-family:'Fraunces', serif;font-weight:500;color:var(--navy);}
+a{color:inherit;}
+
+/* preview banner */
+.preview-banner{
+  background:var(--navy);color:var(--cream);
+  text-align:center;padding:10px 16px;
+  font-size:0.82rem;font-family:'Work Sans',sans-serif;
+}
+
+/* header */
+header{padding:20px 0;border-bottom:1px solid var(--line);}
+.nav{display:flex;align-items:center;justify-content:space-between;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;letter-spacing:0.02em;}
+.brand img{width:34px;height:34px;}
+.nav-links{display:flex;gap:28px;list-style:none;font-size:1rem;font-weight:500;}
+.nav-links a{text-decoration:none;}
+.nav-links a:hover{text-decoration:underline;}
+@media(max-width:640px){.nav-links{display:none;}}
+
+.lang-toggle{
+  display:flex;align-items:center;border:1.5px solid var(--navy);
+  border-radius:20px;overflow:hidden;font-size:0.8rem;font-weight:600;
+  flex-shrink:0;
+}
+.lang-toggle button{
+  border:none;background:transparent;color:var(--navy);
+  padding:6px 12px;cursor:pointer;font-family:'Work Sans',sans-serif;font-weight:600;font-size:0.8rem;
+}
+.lang-toggle button.active{background:var(--navy);color:var(--cream);}
+
+/* hero */
+.hero{padding:70px 0 60px;text-align:center;}
+.hero img.logo{width:180px;margin:0 auto 28px;}
+.hero h1{font-size:clamp(1.9rem,4vw,2.5rem);max-width:640px;margin:0 auto 18px;line-height:1.25;}
+.hero p{color:var(--navy-soft);font-size:1.08rem;max-width:520px;margin:0 auto 34px;}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  display:inline-block;
+  padding:16px 30px;
+  border-radius:var(--radius);
+  font-size:1rem;font-weight:600;
+  text-decoration:none;
+  border:1.5px solid var(--navy);
+}
+.btn-primary{background:var(--navy);color:var(--cream);}
+.btn-secondary{background:transparent;color:var(--navy);}
+
+/* what we do */
+.section{padding:60px 0;}
+.section.alt{background:var(--cream-alt);}
+.section h2{font-size:1.6rem;text-align:center;margin-bottom:10px;}
+.section-sub{text-align:center;color:var(--navy-soft);max-width:480px;margin:0 auto 42px;}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr) !important;}}
+@media(max-width:520px){.cards{grid-template-columns:1fr !important;}}
+.card{
+  background:var(--cream);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px 26px;
+  text-align:center;
+}
+.card svg{width:38px;height:38px;margin:0 auto 18px;color:var(--navy);}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.15rem;margin-bottom:8px;}
+.card p{color:var(--navy-soft);font-size:0.95rem;}
+
+.hero-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;text-align:left;}
+@media(max-width:820px){.hero-inner{grid-template-columns:1fr;text-align:center;}}
+.hero-inner .hero-copy{text-align:left;}
+@media(max-width:820px){.hero-inner .hero-copy{text-align:center;}}
+.hero-inner .hero-ctas{justify-content:flex-start;}
+@media(max-width:820px){.hero-inner .hero-ctas{justify-content:center;}}
+
+.branch-stage{cursor:pointer;}
+.branch-hint{
+  display:flex;align-items:center;gap:6px;justify-content:center;
+  font-size:0.78rem;color:var(--navy-soft);margin-top:6px;
+}
+.branch-hint svg{width:13px;height:13px;}
+.needle{transform-box:fill-box;transform-origin:50% 100%;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.branch-stage:hover .needle, .branch-stage.folded .needle{transform:rotate(var(--fold,0deg)) scaleY(0.7);}
+.illustration-row{display:flex;gap:22px;align-items:center;}
+.branch-stage{width:230px;flex-shrink:0;}
+@media(max-width:820px){.illustration-row{justify-content:center;}}
+.philosophy{
+  flex:1;min-width:0;
+  padding-left:22px;border-left:1px solid var(--line);
+  font-size:0.92rem;color:var(--navy-soft);
+}
+.philosophy b{color:var(--navy);font-family:'Fraunces',serif;font-weight:500;display:block;margin-bottom:6px;font-size:1.02rem;}
+/* movement / manifesto */
+.movement{background:var(--navy);color:var(--cream);}
+.movement .wrap{max-width:760px;}
+.movement .eyebrow{font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:#B9C0CE;margin-bottom:14px;}
+.movement h2{color:var(--cream);font-size:clamp(1.5rem,3vw,1.9rem);line-height:1.3;margin-bottom:26px;}
+.movement p{color:#D7DBE4;font-size:1.02rem;margin-bottom:18px;}
+.believe-list{list-style:none;margin:28px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:720px){.believe-list{grid-template-columns:1fr;}}
+.believe-list li{
+  background:rgba(251,244,234,0.06);
+  border:1px solid rgba(251,244,234,0.14);
+  border-radius:var(--radius);
+  padding:20px;
+  font-size:0.95rem;color:var(--cream);
+  font-family:'Fraunces',serif;font-weight:500;
+  line-height:1.4;
+}
+.movement .closer{
+  border-left:2px solid #C9A15A;
+  padding-left:18px;
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;
+  color:var(--cream);margin-top:30px;
+}
+
+/* origin story */
+.story .wrap{max-width:700px;}
+.story h2{font-size:clamp(1.5rem,3vw,1.9rem);margin-bottom:24px;}
+.story p{color:var(--navy-soft);font-size:1.04rem;margin-bottom:20px;}
+.story-invite{
+  border-left:2px solid #C9A15A;
+  padding-left:18px;
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.12rem;
+  color:var(--navy) !important;margin-top:30px;
+}
+
+/* quiz */
+.quiz-card{
+  background:var(--navy);color:var(--cream);
+  border-radius:var(--radius);padding:44px;
+  max-width:640px;margin:0 auto;
+}
+@media(max-width:640px){.quiz-card{padding:28px 22px;}}
+.quiz-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:26px;gap:16px;flex-wrap:wrap;}
+.quiz-top h2{color:var(--cream);font-size:1.4rem;margin:0;}
+.quiz-count{font-size:0.82rem;color:#C9A15A;white-space:nowrap;}
+.quiz-track{width:100%;height:4px;background:rgba(251,244,234,0.14);border-radius:10px;overflow:hidden;margin-bottom:30px;}
+.quiz-fill{height:100%;background:#C9A15A;width:0%;transition:width .3s;}
+.quiz-question{font-family:'Fraunces',serif;font-size:1.2rem;margin-bottom:20px;line-height:1.4;}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{
+  text-align:left;padding:14px 16px;border-radius:8px;
+  border:1.5px solid rgba(251,244,234,0.2);color:var(--cream);
+  background:rgba(251,244,234,0.03);font-size:0.98rem;
+  transition:all .15s;cursor:pointer;font-family:'Work Sans',sans-serif;
+}
+.quiz-opt:hover{border-color:#C9A15A;}
+.quiz-opt.selected{border-color:#C9A15A;background:rgba(201,161,90,0.12);}
+.quiz-nav{display:flex;justify-content:space-between;margin-top:26px;}
+.quiz-nav button{background:none;border:none;color:#C9A15A;font-weight:600;font-size:0.88rem;cursor:pointer;font-family:'Work Sans',sans-serif;}
+.quiz-nav button:disabled{opacity:0.3;cursor:default;}
+.quiz-result h3{color:var(--cream);font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:10px;}
+.quiz-result p{color:#D7DBE4;margin-bottom:20px;}
+.quiz-badge{
+  display:inline-block;background:#C9A15A;color:var(--navy);
+  padding:10px 18px;border-radius:8px;font-weight:600;margin-bottom:22px;
+}
+.quiz-restart{background:none;border:none;color:#C9A15A;text-decoration:underline;font-size:0.85rem;cursor:pointer;margin-top:16px;font-family:'Work Sans',sans-serif;}
+
+footer{padding:56px 0 30px;border-top:1px solid var(--line);color:var(--navy-soft);font-size:0.9rem;background:var(--cream-alt);}
+.footer-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px;}
+.footer-brand{max-width:280px;}
+.footer-brand .brand{margin-bottom:12px;}
+.footer-cols{display:flex;gap:56px;flex-wrap:wrap;}
+.footer-col h5{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:#8A9086;margin-bottom:14px;font-weight:600;}
+.footer-col a{display:block;margin-bottom:10px;text-decoration:none;color:var(--navy-soft);}
+.footer-col a:hover{color:var(--navy);text-decoration:underline;}
+.footer-contact a{font-weight:600;color:var(--navy);}
+.footer-bottom{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:0.82rem;}
+footer a{text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="preview-banner" data-i18n="banner">This is a visual preview only — not the live site yet. Tell me what to change.</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><img src="logo.png" alt="Mimosa"> MIMOSA</div>
+    <ul class="nav-links">
+      <li><a href="#" data-i18n="nav.home">Home</a></li>
+      <li><a href="#articles" data-i18n="nav.articles">Articles</a></li>
+      <li><a href="#quiz" data-i18n="nav.quiz">Mimosa Reflex</a></li>
+      <li><a href="#explore" data-i18n="nav.kids">For Kids</a></li>
+      <li><a href="#explore" data-i18n="nav.parents">For Parents</a></li>
+      <li><a href="#" class="btn btn-primary" style="padding:8px 16px;font-size:0.88rem;" data-i18n="nav.volunteer">Volunteer</a></li>
+    </ul>
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="tr">TR</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1 data-i18n="hero.title">The reflex that keeps you safe online.</h1>
+      <p data-i18n="hero.sub">Mimosa is a free, non-profit project that teaches everyday people — and parents — how to protect their identity and information online. No tech background needed.</p>
+      <div class="hero-ctas">
+        <a href="#quiz" class="btn btn-primary" data-i18n="hero.cta1">Start Learning</a>
+        <a href="#" class="btn btn-secondary" data-i18n="hero.cta2">Become a Volunteer</a>
+      </div>
+    </div>
+    <div>
+      <div class="illustration-row">
+        <div>
+          <div class="branch-stage" id="branchStage">
+            <svg viewBox="0 0 240 240" width="100%">
+              <!-- stem : short, thick -->
+              <path d="M120 220 C119 170, 121 120, 120 55" stroke="#1C2333" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+              <!-- flower : puff of fine radiating stamens, like a real mimosa bloom -->
+              <g transform="translate(120,42)">
+                <circle r="4.5" fill="#1C2333"/>
+                <g stroke="#1C2333" stroke-width="1.3" stroke-linecap="round">
+                  <line x1="0" y1="-9" x2="0" y2="-24"/>
+                  <line x1="6" y1="-7" x2="15" y2="-19"/>
+                  <line x1="-6" y1="-7" x2="-15" y2="-19"/>
+                  <line x1="9" y1="-2" x2="22" y2="-6"/>
+                  <line x1="-9" y1="-2" x2="-22" y2="-6"/>
+                  <line x1="9" y1="4" x2="22" y2="10"/>
+                  <line x1="-9" y1="4" x2="-22" y2="10"/>
+                  <line x1="4" y1="8" x2="8" y2="21"/>
+                  <line x1="-4" y1="8" x2="-8" y2="21"/>
+                </g>
+                <g fill="#1C2333">
+                  <circle cx="0" cy="-24" r="1.5"/>
+                  <circle cx="15" cy="-19" r="1.5"/>
+                  <circle cx="-15" cy="-19" r="1.5"/>
+                  <circle cx="22" cy="-6" r="1.5"/>
+                  <circle cx="-22" cy="-6" r="1.5"/>
+                  <circle cx="22" cy="10" r="1.5"/>
+                  <circle cx="-22" cy="10" r="1.5"/>
+                  <circle cx="8" cy="21" r="1.5"/>
+                  <circle cx="-8" cy="21" r="1.5"/>
+                </g>
+              </g>
+
+              <!-- leaf cluster, lower : short, thick, dense -->
+              <g transform="rotate(18 120 152)"><line class="needle" style="--fold:-18deg" x1="120" y1="152" x2="120" y2="120" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="rotate(34 120 152)"><line class="needle" style="--fold:-34deg" x1="120" y1="152" x2="120" y2="123" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="rotate(50 120 152)"><line class="needle" style="--fold:-50deg" x1="120" y1="152" x2="120" y2="127" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="rotate(-18 120 152)"><line class="needle" style="--fold:18deg" x1="120" y1="152" x2="120" y2="120" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="rotate(-34 120 152)"><line class="needle" style="--fold:34deg" x1="120" y1="152" x2="120" y2="123" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="rotate(-50 120 152)"><line class="needle" style="--fold:50deg" x1="120" y1="152" x2="120" y2="127" stroke="#1C2333" stroke-width="3" stroke-linecap="round"/></g>
+              <circle cx="120" cy="152" r="2.6" fill="#1C2333"/>
+
+              <!-- leaf cluster, upper : shorter, slightly thinner -->
+              <g transform="rotate(22 120 108)"><line class="needle" style="--fold:-22deg" x1="120" y1="108" x2="120" y2="84" stroke="#1C2333" stroke-width="2.4" stroke-linecap="round"/></g>
+              <g transform="rotate(42 120 108)"><line class="needle" style="--fold:-42deg" x1="120" y1="108" x2="120" y2="87" stroke="#1C2333" stroke-width="2.4" stroke-linecap="round"/></g>
+              <g transform="rotate(-22 120 108)"><line class="needle" style="--fold:22deg" x1="120" y1="108" x2="120" y2="84" stroke="#1C2333" stroke-width="2.4" stroke-linecap="round"/></g>
+              <g transform="rotate(-42 120 108)"><line class="needle" style="--fold:42deg" x1="120" y1="108" x2="120" y2="87" stroke="#1C2333" stroke-width="2.4" stroke-linecap="round"/></g>
+              <circle cx="120" cy="108" r="2.2" fill="#1C2333"/>
+            </svg>
+          </div>
+          <div class="branch-hint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            <span data-i18n="hero.touch">touch</span>
+          </div>
+        </div>
+        <div class="philosophy">
+          <b data-i18n="hero.philosophyTitle">The Mimosa philosophy</b>
+          <span data-i18n="hero.philosophyText">The moment it's touched, the mimosa plant folds its leaves inward — not out of fear, but as a reflex that protects it from harm. That's the instinct we want to help you build for your digital life: notice quickly, and know exactly how to protect yourself.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section movement" id="about">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="movement.eyebrow">Our Movement</div>
+    <h2 data-i18n="movement.title">Secure Identities. Safe Future. Empowered Society.</h2>
+    <p data-i18n="movement.p1">Mimosa is a volunteer-driven movement dedicated to protecting digital identities — not as a service, but as a shared responsibility.</p>
+    <p data-i18n="movement.p2">Digital safety is no longer just a technical issue. It's a growing equity gap for those with limited access to information, low awareness, or limited resources. Mimosa closes that gap not by selling a product, but by sharing knowledge, mobilizing volunteer experts, and empowering communities.</p>
+    <ul class="believe-list">
+      <li data-i18n="movement.believe1">Digital safety is a right, not a privilege.</li>
+      <li data-i18n="movement.believe2">Awareness is the strongest line of defense.</li>
+      <li data-i18n="movement.believe3">Real impact comes from volunteer effort and collaboration.</li>
+    </ul>
+    <p data-i18n="movement.p3">Our volunteers support individuals and communities through workshops, awareness campaigns, and one-on-one guidance.</p>
+    <p class="closer" data-i18n="movement.closer">Joining Mimosa is not taking on a task — it is becoming part of a movement. We are safer together.</p>
+  </div>
+</section>
+
+<section class="section story">
+  <div class="wrap">
+    <h2 data-i18n="story.title">Why We Started</h2>
+    <p data-i18n="story.p1">We started Mimosa because we kept seeing the same thing: people who had the least access to information were the ones most exposed to digital harm. Not because they weren't careful — because no one had ever sat down and explained the risks in a way that made sense to them.</p>
+    <p data-i18n="story.p2">So we built a movement, not a product. A group of volunteers — security professionals, educators, everyday people who care — who show up to run workshops, answer questions, and help people understand what's actually at stake with their digital identity.</p>
+    <p data-i18n="story.p3">We don't think digital safety should depend on how much you can pay for it. It should just be something everyone has access to, the same way we'd expect anyone to know how to lock their front door.</p>
+    <p class="story-invite" data-i18n="story.invite">If that sounds like something you'd want to be part of — as a volunteer, a partner, or just someone who believes in the same thing — we'd genuinely love to hear from you.</p>
+  </div>
+</section>
+
+<section class="section" id="articles">
+  <div class="wrap">
+    <h2 style="text-align:center;font-size:1.6rem;margin-bottom:10px;" data-i18n="articles.title">A few things to read</h2>
+    <p class="section-sub" data-i18n="articles.sub">Short, plain-language guides — one topic at a time.</p>
+    <div class="cards">
+      <div class="card" style="text-align:left;">
+        <span style="display:inline-block;font-size:0.72rem;font-weight:600;color:#8C6B2C;background:#F2E9D8;padding:4px 10px;border-radius:20px;margin-bottom:14px;" data-i18n="articles.tag1">PHISHING</span>
+        <h3 data-i18n="articles.h1">Spot a fake message in 10 seconds</h3>
+        <p data-i18n="articles.p1">Three simple signs — before you ever click a link.</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <span style="display:inline-block;font-size:0.72rem;font-weight:600;color:#8C6B2C;background:#F2E9D8;padding:4px 10px;border-radius:20px;margin-bottom:14px;" data-i18n="articles.tag2">PASSWORDS</span>
+        <h3 data-i18n="articles.h2">A strong password is a long sentence</h3>
+        <p data-i18n="articles.p2">Why length beats complexity, in plain terms.</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <span style="display:inline-block;font-size:0.72rem;font-weight:600;color:#8C6B2C;background:#F2E9D8;padding:4px 10px;border-radius:20px;margin-bottom:14px;" data-i18n="articles.tag3">CHILDREN & PARENTS</span>
+        <h3 data-i18n="articles.h3">Before you post a photo of your child</h3>
+        <p data-i18n="articles.p3">Five things to think about before sharing online.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="explore">
+  <div class="wrap">
+    <h2 data-i18n="explore.title">What you can do here</h2>
+    <p class="section-sub" data-i18n="explore.sub">Four simple things, in plain language.</p>
+    <div class="cards" style="grid-template-columns:repeat(4,1fr);">
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        <h3 data-i18n="explore.h1">Read simple guides</h3>
+        <p data-i18n="explore.p1">Short articles that explain one topic at a time — like spotting a fake message or keeping your password safe.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+        <h3 data-i18n="explore.h2">Games for kids</h3>
+        <p data-i18n="explore.p2">Playful, simple activities that teach children how to stay safe online — no reading-heavy lessons.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <h3 data-i18n="explore.h3">Guidance for parents</h3>
+        <p data-i18n="explore.p3">Easy tips to help protect your child's identity and privacy online, without needing to be a tech expert.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2"/><path d="M17 3.13a4 4 0 010 7.75"/><path d="M22 21v-2a4 4 0 00-3-3.87"/></svg>
+        <h3 data-i18n="explore.h4">Join as a volunteer</h3>
+        <p data-i18n="explore.p4">No experience needed. Help write, translate, or share what we do — a little time makes a difference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quiz">
+  <div class="wrap">
+    <div style="text-align:center;max-width:480px;margin:0 auto 30px;">
+      <p style="color:var(--navy-soft);" data-i18n="quiz.intro">Mimosa Reflex is a quick, judgment-free check-in — 7 everyday situations, so you can see where you're strong and where to focus next.</p>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-top">
+        <h2 data-i18n="quiz.title">Mimosa Reflex</h2>
+        <span class="quiz-count" id="quizCount">1 / 7</span>
+      </div>
+      <div class="quiz-track"><div class="quiz-fill" id="quizFill"></div></div>
+      <div id="quizBody"></div>
+      <div class="quiz-nav" id="quizNav">
+        <button id="quizPrev">← Back</button>
+        <button id="quizNext">Next →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand"><img src="logo.png" alt="Mimosa" style="width:30px;height:30px;"> MIMOSA</div>
+        <p data-i18n="footer.tagline">Secure Identities. Safe Future. Empowered Society. A volunteer-driven, non-profit movement — we never sell anything.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5 data-i18n="footer.about">About</h5>
+          <a href="#about" data-i18n="footer.movement">Our Movement</a>
+          <a href="#about" data-i18n="footer.why">Why We Started</a>
+          <a href="#articles" data-i18n="footer.articles">Articles</a>
+        </div>
+        <div class="footer-col">
+          <h5 data-i18n="footer.involved">Get Involved</h5>
+          <a href="#quiz" data-i18n="footer.reflex">Mimosa Reflex</a>
+          <a href="#explore" data-i18n="footer.kids">For Kids</a>
+          <a href="#explore" data-i18n="footer.parents">For Parents</a>
+          <a href="#" data-i18n="footer.volunteer">Volunteer</a>
+        </div>
+        <div class="footer-col footer-contact">
+          <h5 data-i18n="footer.contact">Contact</h5>
+          <a href="mailto:hello@mimosa.org">hello@mimosa.org</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2025–2026 Mimosa. Non-profit, volunteer-driven.</span>
+      <span data-i18n="footer.noSell">We never sell anything.</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+document.getElementById('branchStage').addEventListener('click', function(){
+  this.classList.toggle('folded');
+});
+
+/* ---------- i18n ---------- */
+const STR = {
+  en: {
+    "title": "Mimosa — Preview",
+    "banner": "This is a visual preview only — not the live site yet. Tell me what to change.",
+    "nav.home": "Home", "nav.articles": "Articles", "nav.quiz": "Mimosa Reflex",
+    "nav.kids": "For Kids", "nav.parents": "For Parents", "nav.volunteer": "Volunteer",
+    "hero.title": "The reflex that keeps you safe online.",
+    "hero.sub": "Mimosa is a free, non-profit project that teaches everyday people — and parents — how to protect their identity and information online. No tech background needed.",
+    "hero.cta1": "Start Learning", "hero.cta2": "Become a Volunteer",
+    "hero.touch": "touch",
+    "hero.philosophyTitle": "The Mimosa philosophy",
+    "hero.philosophyText": "The moment it's touched, the mimosa plant folds its leaves inward — not out of fear, but as a reflex that protects it from harm. That's the instinct we want to help you build for your digital life: notice quickly, and know exactly how to protect yourself.",
+    "movement.eyebrow": "Our Movement",
+    "movement.title": "Secure Identities. Safe Future. Empowered Society.",
+    "movement.p1": "Mimosa is a volunteer-driven movement dedicated to protecting digital identities — not as a service, but as a shared responsibility.",
+    "movement.p2": "Digital safety is no longer just a technical issue. It's a growing equity gap for those with limited access to information, low awareness, or limited resources. Mimosa closes that gap not by selling a product, but by sharing knowledge, mobilizing volunteer experts, and empowering communities.",
+    "movement.believe1": "Digital safety is a right, not a privilege.",
+    "movement.believe2": "Awareness is the strongest line of defense.",
+    "movement.believe3": "Real impact comes from volunteer effort and collaboration.",
+    "movement.p3": "Our volunteers support individuals and communities through workshops, awareness campaigns, and one-on-one guidance.",
+    "movement.closer": "Joining Mimosa is not taking on a task — it is becoming part of a movement. We are safer together.",
+    "story.title": "Why We Started",
+    "story.p1": "We started Mimosa because we kept seeing the same thing: people who had the least access to information were the ones most exposed to digital harm. Not because they weren't careful — because no one had ever sat down and explained the risks in a way that made sense to them.",
+    "story.p2": "So we built a movement, not a product. A group of volunteers — security professionals, educators, everyday people who care — who show up to run workshops, answer questions, and help people understand what's actually at stake with their digital identity.",
+    "story.p3": "We don't think digital safety should depend on how much you can pay for it. It should just be something everyone has access to, the same way we'd expect anyone to know how to lock their front door.",
+    "story.invite": "If that sounds like something you'd want to be part of — as a volunteer, a partner, or just someone who believes in the same thing — we'd genuinely love to hear from you.",
+    "articles.title": "A few things to read",
+    "articles.sub": "Short, plain-language guides — one topic at a time.",
+    "articles.tag1": "PHISHING", "articles.h1": "Spot a fake message in 10 seconds", "articles.p1": "Three simple signs — before you ever click a link.",
+    "articles.tag2": "PASSWORDS", "articles.h2": "A strong password is a long sentence", "articles.p2": "Why length beats complexity, in plain terms.",
+    "articles.tag3": "CHILDREN & PARENTS", "articles.h3": "Before you post a photo of your child", "articles.p3": "Five things to think about before sharing online.",
+    "explore.title": "What you can do here",
+    "explore.sub": "Four simple things, in plain language.",
+    "explore.h1": "Read simple guides", "explore.p1": "Short articles that explain one topic at a time — like spotting a fake message or keeping your password safe.",
+    "explore.h2": "Games for kids", "explore.p2": "Playful, simple activities that teach children how to stay safe online — no reading-heavy lessons.",
+    "explore.h3": "Guidance for parents", "explore.p3": "Easy tips to help protect your child's identity and privacy online, without needing to be a tech expert.",
+    "explore.h4": "Join as a volunteer", "explore.p4": "No experience needed. Help write, translate, or share what we do — a little time makes a difference.",
+    "quiz.intro": "Mimosa Reflex is a quick, judgment-free check-in — 7 everyday situations, so you can see where you're strong and where to focus next.",
+    "quiz.title": "Mimosa Reflex",
+    "footer.tagline": "Secure Identities. Safe Future. Empowered Society. A volunteer-driven, non-profit movement — we never sell anything.",
+    "footer.about": "About", "footer.movement": "Our Movement", "footer.why": "Why We Started", "footer.articles": "Articles",
+    "footer.involved": "Get Involved", "footer.reflex": "Mimosa Reflex", "footer.kids": "For Kids", "footer.parents": "For Parents", "footer.volunteer": "Volunteer",
+    "footer.contact": "Contact",
+    "footer.copyright": "© 2025–2026 Mimosa. Non-profit, volunteer-driven.",
+    "footer.noSell": "We never sell anything."
+  },
+  tr: {
+    "title": "Mimosa — Önizleme",
+    "banner": "Bu yalnızca görsel bir önizlemedir — henüz yayındaki site değil. Neyi değiştirmemi istediğinizi söyleyin.",
+    "nav.home": "Anasayfa", "nav.articles": "Makaleler", "nav.quiz": "Mimosa Refleksi",
+    "nav.kids": "Çocuklar İçin", "nav.parents": "Ebeveynler İçin", "nav.volunteer": "Gönüllü Ol",
+    "hero.title": "Sizi çevrimiçi güvende tutan refleks.",
+    "hero.sub": "Mimosa, sıradan insanlara — ve ebeveynlere — çevrimiçi kimlik ve bilgilerini nasıl koruyacaklarını öğreten ücretsiz, kâr amacı gütmeyen bir projedir. Teknik bilgi gerekmez.",
+    "hero.cta1": "Öğrenmeye Başla", "hero.cta2": "Gönüllü Ol",
+    "hero.touch": "dokun",
+    "hero.philosophyTitle": "Mimosa felsefesi",
+    "hero.philosophyText": "Mimosa bitkisi dokunulduğu an yapraklarını içe kıvırır — korkudan değil, kendisini zarardan koruyan bir refleks olarak. Dijital hayatınız için de sizde geliştirmek istediğimiz içgüdü tam olarak bu: hızla fark edin ve kendinizi nasıl koruyacağınızı tam olarak bilin.",
+    "movement.eyebrow": "Hareketimiz",
+    "movement.title": "Güvenli Kimlikler. Güvenli Gelecek. Güçlü Toplum.",
+    "movement.p1": "Mimosa, dijital kimlikleri korumaya adanmış, gönüllülerin yürüttüğü bir harekettir — bir hizmet olarak değil, ortak bir sorumluluk olarak.",
+    "movement.p2": "Dijital güvenlik artık yalnızca teknik bir mesele değil. Bilgiye erişimi kısıtlı, farkındalığı düşük ya da kaynakları sınırlı olanlar için giderek büyüyen bir eşitsizlik alanı haline geliyor. Mimosa bu açığı bir ürün satarak değil, bilgi paylaşarak, gönüllü uzmanları harekete geçirerek ve toplulukları güçlendirerek kapatıyor.",
+    "movement.believe1": "Dijital güvenlik bir ayrıcalık değil, bir haktır.",
+    "movement.believe2": "Farkındalık en güçlü savunma hattıdır.",
+    "movement.believe3": "Gerçek etki, gönüllü çaba ve iş birliğinden doğar.",
+    "movement.p3": "Gönüllülerimiz atölyeler, farkındalık kampanyaları ve birebir rehberlikle bireylere ve topluluklara destek olur.",
+    "movement.closer": "Mimosa'ya katılmak bir görev üstlenmek değildir — bir hareketin parçası olmaktır. Birlikte daha güvendeyiz.",
+    "story.title": "Neden Başladık",
+    "story.p1": "Mimosa'ya başladık çünkü hep aynı şeyi görüyorduk: bilgiye erişimi en az olan insanlar, dijital zarara en açık olanlardı. Dikkatsiz oldukları için değil — çünkü kimse oturup riskleri onlara anlamlı gelecek şekilde anlatmamıştı.",
+    "story.p2": "Bu yüzden bir ürün değil, bir hareket kurduk. Güvenlik uzmanlarından, eğitimcilerden, önemseyen sıradan insanlardan oluşan bir gönüllü grubu — atölyeler düzenlemek, soruları yanıtlamak ve insanların dijital kimlikleriyle gerçekte neyin risk altında olduğunu anlamalarına yardımcı olmak için burada.",
+    "story.p3": "Dijital güvenliğin, ne kadar ödeyebildiğinize bağlı olması gerektiğini düşünmüyoruz. Tıpkı herkesin ön kapısını nasıl kilitleyeceğini bilmesini beklediğimiz gibi, herkesin erişebileceği bir şey olmalı.",
+    "story.invite": "Bunun parçası olmak isteyeceğiniz bir şey gibi geliyorsa — gönüllü, iş birlikçi ya da sadece aynı şeye inanan biri olarak — sizden haber almaktan gerçekten mutluluk duyarız.",
+    "articles.title": "Okuyabileceğiniz birkaç şey",
+    "articles.sub": "Kısa, sade dilli rehberler — her seferinde tek bir konu.",
+    "articles.tag1": "OLTALAMA", "articles.h1": "Sahte bir mesajı 10 saniyede fark edin", "articles.p1": "Bir bağlantıya tıklamadan önce üç basit işaret.",
+    "articles.tag2": "ŞİFRELER", "articles.h2": "Güçlü bir şifre, uzun bir cümledir", "articles.p2": "Uzunluğun karmaşıklığa neden üstün geldiği, sade bir dille.",
+    "articles.tag3": "ÇOCUKLAR VE EBEVEYNLER", "articles.h3": "Çocuğunuzun fotoğrafını paylaşmadan önce", "articles.p3": "Çevrimiçi paylaşmadan önce düşünülmesi gereken beş şey.",
+    "explore.title": "Burada neler yapabilirsiniz",
+    "explore.sub": "Sade dille dört basit şey.",
+    "explore.h1": "Basit rehberler okuyun", "explore.p1": "Sahte bir mesajı fark etmek ya da şifrenizi güvende tutmak gibi, her seferinde tek bir konuyu anlatan kısa yazılar.",
+    "explore.h2": "Çocuklar için oyunlar", "explore.p2": "Çocuklara çevrimiçi güvende kalmayı öğreten eğlenceli, basit etkinlikler — ağır okuma gerektiren dersler yok.",
+    "explore.h3": "Ebeveynler için rehberlik", "explore.p3": "Teknoloji uzmanı olmanıza gerek kalmadan çocuğunuzun çevrimiçi kimliğini ve gizliliğini korumanıza yardımcı kolay ipuçları.",
+    "explore.h4": "Gönüllü olarak katılın", "explore.p4": "Deneyim gerekmez. Yazmaya, çevirmeye ya da yaptıklarımızı paylaşmaya yardım edin — az bir zaman bile fark yaratır.",
+    "quiz.intro": "Mimosa Refleksi, hızlı ve yargılamadan yapılan bir öz değerlendirmedir — 7 günlük durum sayesinde nerede güçlü olduğunuzu ve nereye odaklanmanız gerektiğini görebilirsiniz.",
+    "quiz.title": "Mimosa Refleksi",
+    "footer.tagline": "Güvenli Kimlikler. Güvenli Gelecek. Güçlü Toplum. Gönüllülerin yürüttüğü, kâr amacı gütmeyen bir hareket — hiçbir şey satmayız.",
+    "footer.about": "Hakkımızda", "footer.movement": "Hareketimiz", "footer.why": "Neden Başladık", "footer.articles": "Makaleler",
+    "footer.involved": "Katılın", "footer.reflex": "Mimosa Refleksi", "footer.kids": "Çocuklar İçin", "footer.parents": "Ebeveynler İçin", "footer.volunteer": "Gönüllü Ol",
+    "footer.contact": "İletişim",
+    "footer.copyright": "© 2025–2026 Mimosa. Kâr amacı gütmeyen, gönüllülerin yürüttüğü.",
+    "footer.noSell": "Hiçbir şey satmayız."
+  }
+};
+
+let currentLang = 'en';
+
+function applyLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.title = STR[lang]['title'];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(STR[lang][key] !== undefined) el.textContent = STR[lang][key];
+  });
+  document.querySelectorAll('#langToggle button').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  renderQuiz();
+}
+
+document.getElementById('langToggle').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-lang]');
+  if(!btn) return;
+  applyLang(btn.dataset.lang);
+});
+
+/* ---------- quiz ---------- */
+const QUIZ_UI = {
+  en: { back:'← Back', next:'Next →', result:'See Result →', done:'Done', correct:'correct', growth:'Your biggest area to grow:', restart:'Restart quiz' },
+  tr: { back:'← Geri', next:'İleri →', result:'Sonucu Gör →', done:'Tamamlandı', correct:'doğru', growth:'Gelişmeniz gereken en büyük alan:', restart:'Testi yeniden başlat' }
+};
+
+const QUIZ = {
+  en: [
+    { cat:'Children & Parents', q:"Would you post a public photo from your child's school event, tagged with their name and school?", opts:["Yes, sharing proud moments is nice","No — name + school + location together is risky, I'd skip it or share privately","Doesn't matter, everyone does it"], correct:1 },
+    { cat:'Phishing', q:"You get an email saying \"your account is suspended, click now.\" What do you do first?", opts:["Click the link right away — I don't want to lose my account","I check the sender's address and the real link destination","I just delete the email without looking"], correct:1 },
+    { cat:'Passwords', q:"Which is the safest password approach?", opts:["Use the same strong password everywhere","A different, long password per account, stored in a password manager","Combine my birthdate and name"], correct:1 },
+    { cat:'Social Media', q:"Why is tagging your real-time location on Instagram risky?", opts:["It isn't risky, everyone does it","It can reveal exactly where you are in real time","It only lowers photo quality"], correct:1 },
+    { cat:'Scams', q:"You get a message promising \"high returns, fast.\" What's the right reflex?", opts:["Try it with a small amount to test it","Treat it with suspicion and verify through official sources","Forward it to a friend, maybe they'll try it"], correct:1 },
+    { cat:'Data Privacy', q:"A newly downloaded app asks for access to your contacts and location. What do you do?", opts:["Grant it right away so the app works","I consider why it's asking, and deny it if unnecessary","I just delete the app without thinking"], correct:1 },
+    { cat:'Digital Footprint', q:"What's a good habit for managing your digital footprint?", opts:["Leaving old, unused accounts as they are","Occasionally searching your own name to see what's visible","Never checking — it never changes anyway"], correct:1 },
+  ],
+  tr: [
+    { cat:'Çocuklar ve Ebeveynler', q:"Çocuğunuzun okul etkinliğinden, adı ve okulu etiketlenmiş herkese açık bir fotoğraf paylaşır mısınız?", opts:["Evet, gurur duyulan anları paylaşmak güzel","Hayır — ad + okul + konum birlikte riskli, paylaşmam ya da özel paylaşırım","Fark etmez, herkes yapıyor"], correct:1 },
+    { cat:'Oltalama', q:"\"Hesabınız askıya alındı, hemen tıklayın\" diyen bir e-posta alıyorsunuz. İlk ne yaparsınız?", opts:["Hemen bağlantıya tıklarım — hesabımı kaybetmek istemem","Gönderenin adresini ve bağlantının gerçek hedefini kontrol ederim","Bakmadan e-postayı silerim"], correct:1 },
+    { cat:'Şifreler', q:"En güvenli şifre yaklaşımı hangisidir?", opts:["Her yerde aynı güçlü şifreyi kullanmak","Her hesap için farklı, uzun bir şifre ve bunu bir şifre yöneticisinde saklamak","Doğum tarihimi ve adımı birleştirmek"], correct:1 },
+    { cat:'Sosyal Medya', q:"Instagram'da gerçek zamanlı konumunuzu etiketlemek neden risklidir?", opts:["Riskli değil, herkes yapıyor","O anda tam olarak nerede olduğunuzu ortaya çıkarabilir","Sadece fotoğraf kalitesini düşürür"], correct:1 },
+    { cat:'Dolandırıcılık', q:"\"Hızlı, yüksek getiri\" vaat eden bir mesaj alıyorsunuz. Doğru refleks nedir?", opts:["Küçük bir miktarla deneyip test etmek","Şüpheyle yaklaşıp resmi kaynaklardan doğrulamak","Bir arkadaşa iletmek, belki o dener"], correct:1 },
+    { cat:'Veri Gizliliği', q:"Yeni indirdiğiniz bir uygulama kişilerinize ve konumunuza erişim istiyor. Ne yaparsınız?", opts:["Uygulama çalışsın diye hemen izin veririm","Neden istediğini düşünürüm, gereksizse reddederim","Düşünmeden uygulamayı silerim"], correct:1 },
+    { cat:'Dijital Ayak İzi', q:"Dijital ayak izinizi yönetmek için iyi bir alışkanlık nedir?", opts:["Eski, kullanılmayan hesapları olduğu gibi bırakmak","Neyin görünür olduğunu görmek için ara sıra kendi adınızı aramak","Hiç kontrol etmemek — nasılsa değişmiyor"], correct:1 },
+  ]
+};
+
+let qStep = 0;
+let qAnswers = new Array(QUIZ.en.length).fill(null);
+let qDone = false;
+
+function renderQuiz(){
+  const list = QUIZ[currentLang];
+  const ui = QUIZ_UI[currentLang];
+  const count = document.getElementById('quizCount');
+  const fill = document.getElementById('quizFill');
+  const body = document.getElementById('quizBody');
+  const nav = document.getElementById('quizNav');
+
+  if(qDone){
+    nav.style.display = 'none';
+    fill.style.width = '100%';
+    count.textContent = ui.done;
+    const scores = {};
+    list.forEach(q=>scores[q.cat]=0);
+    list.forEach((q,i)=>{ if(qAnswers[i]!==q.correct) scores[q.cat]++; });
+    let weakest = list[0].cat, max=-1;
+    Object.keys(scores).forEach(k=>{ if(scores[k]>max){max=scores[k]; weakest=k;} });
+    const correctCount = list.filter((q,i)=>qAnswers[i]===q.correct).length;
+    body.innerHTML = `
+      <div class="quiz-result">
+        <h3>${correctCount} / ${list.length} ${ui.correct}</h3>
+        <p>${ui.growth}</p>
+        <div class="quiz-badge">${weakest}</div>
+        <br>
+        <button class="quiz-restart" id="qRestart">${ui.restart}</button>
+      </div>`;
+    document.getElementById('qRestart').addEventListener('click', ()=>{
+      qStep=0; qAnswers=new Array(list.length).fill(null); qDone=false; renderQuiz();
+    });
+    return;
+  }
+
+  nav.style.display='flex';
+  const q = list[qStep];
+  count.textContent = `${qStep+1} / ${list.length}`;
+  fill.style.width = `${(qStep/list.length)*100}%`;
+  body.innerHTML = `
+    <div class="quiz-question">${q.q}</div>
+    <div class="quiz-opts">
+      ${q.opts.map((o,i)=>`<button class="quiz-opt ${qAnswers[qStep]===i?'selected':''}" data-i="${i}">${o}</button>`).join('')}
+    </div>`;
+  body.querySelectorAll('.quiz-opt').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ qAnswers[qStep]=parseInt(btn.dataset.i); renderQuiz(); });
+  });
+  document.getElementById('quizPrev').textContent = ui.back;
+  document.getElementById('quizPrev').disabled = qStep===0;
+  document.getElementById('quizNext').disabled = qAnswers[qStep]===null;
+  document.getElementById('quizNext').textContent = qStep===list.length-1 ? ui.result : ui.next;
+}
+document.getElementById('quizPrev').addEventListener('click', ()=>{ if(qStep>0){qStep--; renderQuiz();} });
+document.getElementById('quizNext').addEventListener('click', ()=>{
+  const list = QUIZ[currentLang];
+  if(qStep<list.length-1){qStep++; renderQuiz();} else {qDone=true; renderQuiz();}
+});
+renderQuiz();
+</script>
+</body>
+</html>
